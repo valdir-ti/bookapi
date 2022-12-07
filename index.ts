@@ -8,17 +8,19 @@ const app = express()
 const port = 8800
 
 const connect = async () => {
+
     try {
+        const mongo_url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.fwkqxjm.mongodb.net/booking?retryWrites=true&w=majority`
         mongoose.set('strictQuery', false)
-        await mongoose.connect(process.env.MONGO_URL || "");
+        await mongoose.connect(mongo_url || "");
         console.log('Connected to mongoDB')
     } catch (error) {
         throw error
     }
 }
 
-app.get('/', (req, res) => {
-    res.status(200).send({ message: 'initial route' })
+app.get('/', (_, res) => {
+    res.status(200).send({ message: 'Initial Route' })
 })
 
 mongoose.connection.on('disconnected', () => {
