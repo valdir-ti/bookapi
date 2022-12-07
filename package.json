@@ -2,9 +2,9 @@
   "name": "bookapi",
   "version": "1.0.0",
   "description": "",
-  "main": "api/index.ts",
+  "main": "index.ts",
   "scripts": {
-    "dev": "nodemon api/index.ts",
+    "dev": "nodemon index.ts",
     "deploy": "vercel deploy --prod"
   },
   "keywords": [],

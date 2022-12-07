@@ -5,10 +5,11 @@ import mongoose from 'mongoose'
 dotenv.config()
 
 const app = express()
+app.use(express.json())
+
 const port = 8800
 
 const connect = async () => {
-
     try {
         const mongo_url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.fwkqxjm.mongodb.net/booking?retryWrites=true&w=majority`
         mongoose.set('strictQuery', false)
@@ -19,7 +20,7 @@ const connect = async () => {
     }
 }
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/api', (req: Request, res: Response) => {
     res.status(200).send({ message: 'Initial Route' })
 })
 
