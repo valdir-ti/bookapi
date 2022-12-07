@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import express from 'express'
+import express, { Request, Response } from 'express'
 import mongoose from 'mongoose'
 
 dotenv.config()
@@ -19,7 +19,7 @@ const connect = async () => {
     }
 }
 
-app.get('/', (_, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.status(200).send({ message: 'Initial Route' })
 })
 
