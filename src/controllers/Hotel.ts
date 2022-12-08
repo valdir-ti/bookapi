@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 
-import Hotels from "../models/Hotels";
+import Hotel from "../models/Hotel";
 
 export const getHotels = async (req: Request, res: Response, next: any) => {
   try {
-    const hotels = await Hotels.find();
+    const hotels = await Hotel.find();
     res.status(200).json(hotels);
   } catch (err) {
     next(err);
@@ -13,7 +13,7 @@ export const getHotels = async (req: Request, res: Response, next: any) => {
 
 export const getHotel = async (req: Request, res: Response, next: any) => {
   try {
-    const hotel = await Hotels.findById(req.params.id);
+    const hotel = await Hotel.findById(req.params.id);
     res.status(200).json(hotel);
   } catch (err) {
     next(err);
@@ -22,7 +22,7 @@ export const getHotel = async (req: Request, res: Response, next: any) => {
 
 export const updateHotel = async (req: Request, res: Response, next: any) => {
   try {
-    const updatedHotel = await Hotels.findByIdAndUpdate(
+    const updatedHotel = await Hotel.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
@@ -36,7 +36,7 @@ export const updateHotel = async (req: Request, res: Response, next: any) => {
 };
 
 export const createHotel = async (req: Request, res: Response, next: any) => {
-  const newHotel = new Hotels(req.body);
+  const newHotel = new Hotel(req.body);
 
   try {
     const savedHotel = await newHotel.save();
@@ -48,7 +48,7 @@ export const createHotel = async (req: Request, res: Response, next: any) => {
 
 export const deleteHotel = async (req: Request, res: Response, next: any) => {
   try {
-    await Hotels.findByIdAndDelete(req.params.id);
+    await Hotel.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Hotel has been deleted" });
   } catch (err) {
     next(err);
