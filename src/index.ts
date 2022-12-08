@@ -21,7 +21,7 @@ const connect = async () => {
 };
 
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).send({ message: "Initial Route" });
+  res.status(200).json({ message: "Initial Route" });
 });
 
 mongoose.connection.on("disconnected", () => {
