@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 
+import { authRouter, hotelsRouter, roomsRouter, usersRouter } from "./routes";
+
 dotenv.config();
 
 const app = express();
@@ -19,6 +21,11 @@ const connect = async () => {
     throw error;
   }
 };
+
+app.use("/auth", authRouter);
+app.use("/users", usersRouter);
+app.use("/hotels", hotelsRouter);
+app.use("/rooms", roomsRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Initial Route" });
