@@ -3,16 +3,21 @@ import Hotels from "../models/Hotels";
 
 const hotelsRouter = express.Router();
 
-hotelsRouter.get("/", (req, res) => {
-  res.json({ message: "this is the hotels endpoint" });
+hotelsRouter.get("/", async (req, res) => {
+  try {
+    const hotels = await Hotels.find();
+    res.status(200).json(hotels);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 hotelsRouter.get("/:id", async (req, res) => {
   try {
-    const findedHotel = await Hotels.findById(
+    const hotel = await Hotels.findById(
       req.params.id
     );
-    res.status(200).json(findedHotel);
+    res.status(200).json(hotel);
   } catch (err) {
     res.status(500).json(err);
   }
