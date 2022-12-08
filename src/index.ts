@@ -2,7 +2,13 @@ import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 
-import { authRouter, hotelsRouter, roomsRouter, usersRouter } from "./routes";
+import {
+  authRouter,
+  hotelsRouter,
+  roomsRouter,
+  usersRouter,
+  healthcheckRouter,
+} from "./routes";
 
 dotenv.config();
 
@@ -22,6 +28,7 @@ const connect = async () => {
   }
 };
 
+app.use("/healthcheck", healthcheckRouter);
 app.use("/auth", authRouter);
 app.use("/users", usersRouter);
 app.use("/hotels", hotelsRouter);
