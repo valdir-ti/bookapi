@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-const port = 8800;
+const port = process.env.PORT || 8800;
 
 const connect = async () => {
   try {
