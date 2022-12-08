@@ -38,6 +38,17 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Initial Route" });
 });
 
+app.use((err: any, req: Request, res: Response, next: any) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
+
 mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected");
 });
