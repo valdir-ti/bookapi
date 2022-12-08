@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 
@@ -13,6 +14,9 @@ import {
 dotenv.config();
 
 const app = express();
+
+//middlewares
+app.use(cookieParser());
 app.use(express.json());
 
 const port = process.env.PORT || 8800;
