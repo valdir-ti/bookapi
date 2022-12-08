@@ -7,6 +7,17 @@ hotelsRouter.get("/", (req, res) => {
   res.json({ message: "this is the hotels endpoint" });
 });
 
+hotelsRouter.get("/:id", async (req, res) => {
+  try {
+    const findedHotel = await Hotels.findById(
+      req.params.id
+    );
+    res.status(200).json(findedHotel);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 hotelsRouter.post("/", async (req, res) => {
   const newHotel = new Hotels(req.body);
 
