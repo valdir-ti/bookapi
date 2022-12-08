@@ -25,7 +25,7 @@ const hotelSchema = new Schema({
   photos: {
     type: [String],
   },
-  title: { 
+  title: {
     type: String,
     require: true,
   },
@@ -49,6 +49,10 @@ const hotelSchema = new Schema({
   featured: {
     type: Boolean,
     default: false,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
   },
 });
 
