@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { createError } from "../utils/error";
+import { createError, hotelValidate } from "../utils";
 
 import Hotel from "../models/Hotel";
 
@@ -48,19 +48,11 @@ export const updateHotel = async (req: Request, res: Response, next: any) => {
 export const createHotel = async (req: Request, res: Response, next: any) => {
   const newHotel = new Hotel(req.body);
 
-  if (!newHotel) return next(createError(400, "No data provided"));
-  if (!newHotel.name) return next(createError(400, "No hotel name provided"));
-  if (!newHotel.type) return next(createError(400, "No hotel type provided"));
-  if (!newHotel.city) return next(createError(400, "No hotel city provided"));
-  if (!newHotel.address)
-    return next(createError(400, "No hotel address provided"));
-  if (!newHotel.distance)
-    return next(createError(400, "No hotel distance provided"));
-  if (!newHotel.title) return next(createError(400, "No hotel title provided"));
-  if (!newHotel.description)
-    return next(createError(400, "No hotel description provided"));
-  if (!newHotel.cheapestPrice)
-    return next(createError(400, "No hotel cheapestPrice provided"));
+  const validation = hotelValidate(newHotel);
+
+  if (validation) {
+    return next(createError(400, validation));
+  }
 
   try {
     const savedHotel = await newHotel.save();

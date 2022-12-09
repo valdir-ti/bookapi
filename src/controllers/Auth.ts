@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import User from "../models/User";
-import { createError } from "../utils/error";
+import { createError } from "../utils";
 
 type UserDoc = {
   _doc: any;

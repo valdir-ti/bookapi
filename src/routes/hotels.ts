@@ -7,7 +7,7 @@ import {
   getHotels,
   updateHotel,
 } from "../controllers/Hotel";
-import { verifyAdmin, verifyToken } from "../utils/verifyToken";
+import { verifyAdmin, verifyToken } from "../utils";
 
 const hotelsRouter = express.Router();
 
