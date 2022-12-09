@@ -7,8 +7,7 @@ import {
   getHotels,
   updateHotel,
 } from "../controllers/Hotel";
-
-// import { createError } from "../utils/error";
+import { verifyAdmin, verifyToken } from "../utils/verifyToken";
 
 const hotelsRouter = express.Router();
 
@@ -16,10 +15,10 @@ hotelsRouter.get("/", getHotels);
 
 hotelsRouter.get("/:id", getHotel);
 
-hotelsRouter.post("/", createHotel);
+hotelsRouter.post("/", verifyToken, verifyAdmin, createHotel);
 
-hotelsRouter.put("/:id", updateHotel);
+hotelsRouter.put("/:id", verifyToken, verifyAdmin, updateHotel);
 
-hotelsRouter.delete("/:id", deleteHotel);
+hotelsRouter.delete("/:id", verifyToken, verifyAdmin, deleteHotel);
 
 export { hotelsRouter };

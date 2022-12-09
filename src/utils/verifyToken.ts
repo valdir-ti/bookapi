@@ -30,3 +30,17 @@ export const verifyUser = (req: Request, res: Response, next: NextFunction) => {
     }
   });
 };
+
+export const verifyAdmin = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  verifyToken(req, res, () => {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      return next(createError(403, "You are not admin"));
+    }
+  });
+};
