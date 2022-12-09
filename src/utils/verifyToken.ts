@@ -13,7 +13,7 @@ export const verifyToken = (
 
   if (!token) return next(createError(401, "You are not authenticated"));
 
-  jwt.verify(token, secret, (err, user) => {
+  jwt.verify(token, secret, (err: any, user: any) => {
     if (err) return next(createError(401, "Invalid credentials."));
 
     req.user = user;

@@ -10,6 +10,10 @@ usersRouter.get("/checkauth", verifyToken, (req, res, next) => {
   res.send("You are authenticated");
 });
 
+usersRouter.get("/checkuserauth/:id", verifyToken, (req, res, next) => {
+  res.send("You can delete your account");
+});
+
 usersRouter.get("/", getUsers);
 
 usersRouter.get("/:id", getUser);

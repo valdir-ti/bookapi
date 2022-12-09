@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon --files src/index.ts",
     "postinstall": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "restore": "yarn cache clean --force  && rm -rf node_modules && rm -rf yarn.lock && yarn install"
   },
   "keywords": [],
   "author": "",
