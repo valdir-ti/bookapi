@@ -1,6 +1,6 @@
 import express from "express";
 
-import { verifyToken } from "../utils/verifyToken";
+import { verifyToken, verifyUser } from "../utils/verifyToken";
 
 import { getUser, getUsers, deleteUser, updateUser } from "../controllers/User";
 
@@ -10,7 +10,7 @@ usersRouter.get("/checkauth", verifyToken, (req, res, next) => {
   res.send("You are authenticated");
 });
 
-usersRouter.get("/checkuserauth/:id", verifyToken, (req, res, next) => {
+usersRouter.get("/checkuserauth/:id", verifyUser, (req, res, next) => {
   res.send("You can delete your account");
 });
 
