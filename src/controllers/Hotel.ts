@@ -23,9 +23,17 @@ export const getHotel = async (req: Request, res: Response, next: any) => {
 };
 
 export const updateHotel = async (req: Request, res: Response, next: any) => {
+  const hotelId = req.params.id;
+
+  const hotel = await Hotel.findById(hotelId);
+
+  if (!hotel) {
+    return next(createError(400, "Invalid hotel"));
+  }
+
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(
-      req.params.id,
+      hotelId,
       {
         $set: req.body,
       },
