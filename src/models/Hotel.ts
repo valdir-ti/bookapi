@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
+import { IHotel } from "../interfaces/IHotel";
+
 const { Schema, model } = mongoose;
 
-const hotelSchema = new Schema(
+const hotelSchema = new Schema<IHotel>(
   {
     name: {
       type: String,
@@ -57,4 +59,4 @@ const hotelSchema = new Schema(
   }
 );
 
-export default model("Hotel", hotelSchema);
+export default model<IHotel>("Hotel", hotelSchema);
