@@ -56,11 +56,9 @@ export const login = async (req: Request, res: Response, next: any) => {
       return next(createError(400, "User or Password are incorrect"));
 
     const userDoc = user._doc;
+    const secret = process.env.JWT_SECRET || "secretkey";
 
-    const token = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT_TOKEN || "secret"
-    );
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, secret);
 
     const { isAdmin, password, __v, updatedAt, createdAt, ...others } = userDoc;
 
