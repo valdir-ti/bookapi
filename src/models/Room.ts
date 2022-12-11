@@ -1,24 +1,36 @@
 import mongoose from "mongoose";
+import { IRooms } from "../interfaces/IRooms";
+
 const { Schema, model } = mongoose;
 
-const roomSchema = new Schema(
+const roomSchema = new Schema<IRooms>(
   {
-    number: {
-      type: Number,
-      require: true,
-    },
-    description: {
+    title: {
       type: String,
       require: true,
     },
-    isEmpty: {
-      type: Boolean,
-      default: false,
+    price: {
+      type: Number,
+      require: true,
     },
+    maxPeople: {
+      type: Number,
+      require: true,
+    },
+    desc: {
+      type: String,
+      require: true,
+    },
+    roomNumbers: [
+      {
+        number: Number,
+        unavailableDates: { type: [Date] },
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-export default model("Room", roomSchema);
+export default model<IRooms>("Room", roomSchema);

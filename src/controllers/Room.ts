@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import Room from "../models/Room";
+import Hotel from "../models/Hotel";
 
 export const getRooms = async (req: Request, res: Response, next: any) => {
   try {
@@ -36,10 +37,21 @@ export const updateRoom = async (req: Request, res: Response, next: any) => {
 };
 
 export const createRoom = async (req: Request, res: Response, next: any) => {
+  const hotelId = req.params.hotelId;
   const newRoom = new Room(req.body);
 
   try {
     const savedRoom = await newRoom.save();
+
+    try {
+      await Hotel.findByIdAndUpdate(hotelId, {
+        $push: {
+          rooms: savedRoom._id,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
     res.status(200).json(savedRoom);
   } catch (err) {
     next(err);
@@ -47,8 +59,18 @@ export const createRoom = async (req: Request, res: Response, next: any) => {
 };
 
 export const deleteRoom = async (req: Request, res: Response, next: any) => {
+  const hotelId = req.params.hotelId;
   try {
     await Room.findByIdAndDelete(req.params.id);
+    try {
+      await Hotel.findByIdAndUpdate(hotelId, {
+        $pull: {
+          rooms: req.params.id,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
     res.status(200).json({ message: "Room has been deleted" });
   } catch (err) {
     next(err);
