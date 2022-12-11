@@ -1,3 +1,3 @@
 export * from "./error";
-export * from "./validateHotel";
+export * from "./hotelFieldsValidate";
 export * from "./verifyToken";

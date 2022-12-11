@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { createError, hotelValidate } from "../utils";
+import { createError, hotelFieldsValidate } from "../utils";
 
 import Hotel from "../models/Hotel";
 
@@ -48,7 +48,7 @@ export const updateHotel = async (req: Request, res: Response, next: any) => {
 export const createHotel = async (req: Request, res: Response, next: any) => {
   const newHotel = new Hotel(req.body);
 
-  const validation = hotelValidate(newHotel);
+  const validation = hotelFieldsValidate(newHotel);
 
   if (validation) {
     return next(createError(400, validation));
